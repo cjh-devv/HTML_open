@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            margin: 5px;
+        }
+        .green{background-color: green; float: left;}
+        .blue{background-color: blue; float: left;}
+        .orange{background-color: orange; float: right;}
+        .black{background-color: black; clear: both;}
+        .line{background-color: red; height: 50px;}
+    </style>
+</head>
+<body>
+    <div class="box green"></div>
+    <div class="box blue"></div>
+    <div class="box orange"></div>
+    <div class="line"></div>
+    <div class="box black"></div>
+    <!-- 라인은 아직 클리어 안떠서 플로트들이랑 겹침. 블랙이 먼저 나오면 클리어됬으니 원래대로 밑에서 출력-->
+</body>
+</html>

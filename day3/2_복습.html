@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            width: 800px;
+            /* 상하 10픽셀  좌우는 알아서 */
+            margin: 10px auto;
+        }
+        .txt{
+            /* css 색주는 대표 방법 1)자체제공  2) 사각형클릭디테일하게(알(0~255),지,비) 3)#123123 : #16진수   ff = 255   #eee = #eeeeee(생략해서)*/
+            /* 무슨색인지 알고 싶다 -> 우클릭 검사 해서 개발자도구 색변경쪽 암거나 누르고 스포이드같이 생긴거 누르고 알고싶은 부분 클릭! */
+            color: blue;
+            font-size: 300;
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: underline;
+            text-align: center;
+            text-shadow: 2px 2px 2px black;
+        }
+        .box1{
+            border: 2px solid black;
+            width: 200px;
+            height: 200px;
+        }
+        .temp1{
+            border: 2px solid black;
+            width: 200px;
+            height: 200px;
+        }
+        .box2{
+            width: 600px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 30px 0px;
+        }
+    </style>
+</head>
+<body>
+    <!--  컨테이너를 잡는게 보통 -->
+    <div id="container">
+        <!-- text css 속성 -->
+         <div class="txt">HTML</div>
+        <hr>
+        <div class="box1"></div>
+        <br>
+        <span class="temp1">span 태그!!</span>
+        <!-- 위쓰 많이 줘도 변하지 않는다.  자기영역에만 제한되서 -->
+         <!-- 디브는 아래로 추가되고 스팬은 옆으로 추가    디브도 옆으로 추가하고싶다? ==>  인라인블록을 사용! 블록처럼 크기지정할수있으면서 인라인처럼 지 영역만 -->
+        <br>
+        <div class="box2">
+            HTML JAVASCRIPT
+        </div>
+    </div>
+
+</body>
+</html>

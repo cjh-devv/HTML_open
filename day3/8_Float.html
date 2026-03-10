@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- BFC(Block Formatting Context) -->
+    <!-- 원래대로라면은 div박스는 float과 겹쳐짐 -->
+    <!-- 텍스트 라인은 float를 피해서 배치 플롯은 텍스트에 한해 겹치는 걸 피한다 무시한다.-->
+    <!-- 알트는 이미지에 대한 설명을 작성 이미지 엑박떴을때 글자로 설명이라도 하게 쓰는게 좋긴 하다-->
+    <img src="../media/캡처4.JPG" width="200" alt="배경!!" height="200">
+    <!-- 1)영역잡을때 2)이미지에 대한 설명 쓸때 플롯 활용 -->
+    <div>안녕? 배경이야!</div>
+    <div>배경배경배경배경배경배경배경배경배경배경</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .list1{
+            list-style-type: upper-latin;
+        }
+        .list2{
+            list-style-image: url(../media/dot.png);
+        }
+        /* list3, li  list3랑 li 전체   list3 li  list3 안에 있는 li 전체 */
+        .list3 li{   
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- ul 이지만 앞에 특수기호 바꾸는 방법 -->
+    <ul class="list1">
+        <li>자바</li>
+        <li>오라클</li>
+        <li>html</li>
+    </ul>
+    <ul class="list2">
+        <li>자바</li>
+        <li>오라클</li>
+        <li>html</li>
+    </ul>
+    <!-- 좌우로 붙이기 -->
+    <ul class="list3">
+        <li>자바</li>
+        <li>오라클</li>
+        <li>html</li>
+    </ul>
+</body>
+</html>

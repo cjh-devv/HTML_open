@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, tr, th, td{
+                border : 2px solid black;  /*2px 크기의 검은색 선(solid) */
+                border-collapse: collapse;   /*겹치는 선을 하나로 */
+                padding : 5px 20px; /* 상하 5px  좌우 20px */
+                text-align: center;
+            }
+            th{
+                background-color: aliceblue;
+            }
+            td{
+                width: 300;
+                text-align: left;
+            }
+        span{
+            color: blue;
+        }
+        #txt1{
+            font-weight: bold;
+        }
+        .txt2{
+            background-color: red;
+        }
+        .txt2:hover{
+            background-color: black;
+            color: red;
+        }
+        #txt1:hover{
+            background-color: green;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <!-- 리스트 -->
+<!-- ol, ul    순서가 있냐 없냐-->
+ <!-- type 속성을 이용해서 원하는 순서를 정의할 수 있다.  ul 동그라미도 교체 가능 이미지로 교체가능-->
+ <ul>
+    <li>자바</li>
+    <li>오라클</li>
+    <li>html</li>
+ </ul>
+ <!-- 링크  절대경로는 상대가 인식하지 못해서 상대경로 써야한다-->
+  <a href="../day2/">
+    <img src="../media/캡처1.JPG" width="200" height="200">
+  </a>
+  <hr>
+  <!-- 테이블 tr 먼저 정의-->
+   <table>
+    <tr>
+        <th>모집 기간</th>
+         <td>3월 5일 ~ 3월 10일</td>
+    </tr>
+   </table>
+<hr>
+<!--  css 설정 대상 -->
+<!-- 태그(모든태그가 대상이기에 원치않는것도 바뀔수있다), id(유니크하게), class(중복허용하기에 여러 css부여할때 좋다) br태그 남발 좋지않다, 아이디 가져도 클래스도 가질 수 있다-->
+<span class="txt2">테스트 1</span>
+<br>
+<span id="txt1">테스트 2</span>  
+<br>
+<span class="txt2">테스트 3</span> 
+</body>
+</html>
