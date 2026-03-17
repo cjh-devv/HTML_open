@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 영역잡는, 반응형 웹  -->
+    <style>
+        body{
+            background-color: #ddd;
+        }
+        #container > div{
+            padding: 10px;
+        }
+
+        #container {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: 300px 1fr;
+            grid-template-rows: 150px minmax(500px, auto) 150px;     /*auto해두면 계속 늘어날수있다(스크롤)*/
+            grid-template-areas: 
+            "header header"
+            "side content"
+            "footer footer";
+        }
+        .header {
+            grid-area: header; 
+            background-color: #ff6b6b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 10px;
+        }
+        #minicontainer{
+            width: 170px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 2px 4px 8px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .headimg{
+            width: 15%; height: 15%;
+        }
+        .minitxt{
+            margin-top: 10px;
+        }
+        #searcharea{
+            width: 550px;
+            border: 2px solid green;
+            border-radius: 50px;
+            box-sizing: border-box;
+            background-color: white;
+            display: flex;
+        }
+        .searchinner{
+            width:380px;
+            font-size: 30px;
+        }
+        .search{
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+        #homebtn{
+            font-size: 50px;
+        }
+        .side {
+            grid-area: side;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            border: 2px solid white;
+            border-radius: 10px;
+            background-color: white
+            }
+        
+        .main-menu{
+            font-weight: bold;
+            width: 150px;
+            padding: 10px;
+            /* 패딩하니까 글자가 중간쯤에 이쁘게 놓임*/
+            box-sizing: border-box;
+            cursor: pointer;
+            /* 마우스 대면 모양 바뀜 */
+        }
+        .sub-menu a{
+            display: block;
+            padding: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+        .sub-menu a:hover{
+            width: 250px;
+            background-color: blue;
+            border-radius: 10px;
+            color: white;
+        }
+        .content {
+            grid-area: content;
+            background-color: #eee;
+            box-shadow: none;
+            border-radius: 10px;
+            display: grid;
+            /* grid-template-columns: repeat(5, 1fr); */
+            grid-template-rows: repeat(3, 250px);
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); 
+            gap: 30px;
+                        
+        }
+        .widget{
+            width: 200px;
+            height: 250px;
+            background-color: white;
+            border-radius: 10px;
+            text-align: left;
+            margin: 20px 10px;
+            padding: 0px 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .card{
+            width: 140px;
+            height: 140px;
+            border: 2px solid #ccc;
+            border-radius: 10%;
+            margin: 30px 30px;
+            background-size: contain;
+        }
+        #price{
+            color: red;
+        }
+        @media screen and (max-width : 768px) {
+            #container{
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 150px 150px 1fr 150px ; 
+                /* 이거 1열로 줄줄히 배열해야하니까 헤더 사이드 컨텐츠 푸터  하나씩 나열하면 되지 근데 컨텐츠는 길어져야하니까 1fr */
+            grid-template-areas: 
+            "header"
+            "side"
+            "content"
+            "footer";
+            }
+        }
+        .footer {grid-area: footer; background-color: #45b7d1; border-radius: 10px;}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="header">
+            <div id="minicontainer">
+                <img src="../media/이미지2.jfif" alt="" class="headimg">
+                <div class="minitxt">좋은쇼핑몰</div>
+            </div>
+            <div id="searcharea">
+            <label>
+                 <a id="homebtn"  href="111_Grid_실습.html">🏘️</a>
+                <input class="searchinner"  type="text" placeholder="검색할 상품을 입력하세요.">
+                <img class="search" src="../media/search.png" alt="">
+            </label>
+            </div>
+            <div>🎃🎊🎉홍길동</div>
+        </div>
+        <div class="side">
+            <div class="top-menu">
+                <h3 class="main-menu">카테고리</h3>
+                <div class="sub-menu">
+                    <div><a href="">전체상품</a></div>
+                    <div><a href="">스마트폰</a></div>
+                    <div><a href="">게임기</a></div>
+                    <div><a href="">노트북</a></div>
+                    <div><a href="">기타</a></div>
+                </div>
+            </div>
+            <div class="top-menu2">
+            <h3 class="main-menu">가격대</h3>
+                <div class="sub-menu2">
+                    <div><input type="checkbox">1만원 이하</div>
+                    <div><input type="checkbox">1만원 ~ 3만원</div>
+                    <div><input type="checkbox">3만원 ~ 5만원</div>
+                    <div><input type="checkbox">5만원 이상</div>
+
+                </div>
+            </div>    
+        </div>
+
+        <div class="content">
+            <div class="widget">
+                <div class="card" style="background-image: url(../media/캡처1.JPG);"></div>
+                <div>
+                    갤럭시 S24
+                </div>
+                <div id="price">
+                    15,900원
+                </div>
+            </div>
+            <div class="widget">
+                <div class="card" style="background-image: url(../media/캡처2.JPG);"></div>
+                <div>
+                    아이폰 15
+                </div>
+                <div id="price">
+                    15,900원
+                </div>
+            </div>
+            <div class="widget">
+                <div class="card" style="background-image: url(../media/캡처3.JPG);"></div>
+                <div>
+                    LG OLED TV
+                </div>
+                <div id="price">
+                    15,900원
+                </div>
+            </div>
+            <div class="widget">
+                <div class="card" style="background-image: url(../media/캡처4.JPG);"></div>
+                <div>
+                    맥북 에어 M3
+                </div>
+                <div id="price">
+                    15,900원
+                </div>
+            </div>
+            <div class="widget">
+                <div class="card" style="background-image: url(../media/이미지3.jfif);"></div>
+                <div id="price">
+                    갤럭시 북4
+                </div>
+                <div>
+                    15,900원
+                </div>
+            </div>
+        </div>
+        <div class="footer">푸터~~</div>
+    </div>
+</body>
+</html>
