@@ -1,0 +1,175 @@
+body{
+            background-color: #ddd;
+        }
+        /* #container > div{
+            padding: 10px;
+        } */
+
+        .container {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: 300px 1fr;
+            grid-template-rows: 150px minmax(200px, auto) minmax(800px, auto) 150px;     /*auto해두면 계속 늘어날수있다(스크롤)*/
+            grid-template-areas: 
+            "header header"
+            "swiper swiper"
+            "side content"
+            "footer footer";
+        }
+        .header {
+            grid-area: header; 
+            background-color: #e3ecf2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 10px;
+        }
+        .header-logo{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .logo-image{
+            height: 100px;
+            width: 100px;
+            object-fit: contain;
+            border-radius: 40px;
+            box-shadow: 5px 5px 5px #b0a7a7;
+        }
+        .header-search{
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 5px 5px 5px 15px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header-search input{
+            border: none;
+            background: transparent;
+            color: #333;
+            padding: 8px 0;
+            width: 100%;
+            outline: none;
+            font-size: 15px;
+        }
+        .search-btn{
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .minitxt{
+            margin-top: 10px;
+        }
+        .box-banner{
+            grid-area: swiper;
+        }
+        .swiper {
+            width: 100%;
+            height: auto;
+            /* wdith : 800px 등 원하는 크기 가능 */
+        }
+        /* 슬라이드 안의 이미지가 영역에 딱 맞게 들어가도록 설정 */
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            display: block;
+            border-radius: 10px;
+        }
+        .side {
+            grid-area: side;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            border: 2px solid white;
+            border-radius: 10px;
+            background-color: white
+            }
+        
+        .main-menu{
+            font-weight: bold;
+            width: 150px;
+            padding: 10px;
+            /* 패딩하니까 글자가 중간쯤에 이쁘게 놓임*/
+            box-sizing: border-box;
+            cursor: pointer;
+            /* 마우스 대면 모양 바뀜 */
+        }
+        .sub-menu a{
+            display: block;
+            padding: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+        }
+        .sub-menu a:hover{
+            width: 250px;
+            background-color: blue;
+            border-radius: 10px;
+            color: white;
+        }
+        .sub-menu li{
+            list-style: none;
+        }
+        .content {
+            grid-area: content;
+            background-color: #eee;
+            box-shadow: none;
+            border-radius: 10px;
+            display: grid;
+            /* grid-template-columns: repeat(5, 1fr); */
+            grid-template-rows: repeat(3, 275px);
+            grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); 
+            gap: 30px;
+                        
+        }
+        .widget{
+            width: 200px;
+            height: 270px;
+            background-color: white;
+            border-radius: 10px;
+            text-align: left;
+            margin: 20px 10px;
+            padding: 0px 15px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .card{
+            width: 140px;
+            height: 140px;
+            border: 2px solid #ccc;
+            border-radius: 10%;
+            margin: 30px 30px;
+            background-size: contain;
+        }
+        .category{
+            font-size: 12px;
+        }
+        #price{
+            color: red;
+        }
+        @media screen and (max-width : 768px) {
+            .container{
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 150px 150px 150px 1fr 150px ; 
+                /* 이거 1열로 줄줄히 배열해야하니까 헤더 사이드 컨텐츠 푸터  하나씩 나열하면 되지 근데 컨텐츠는 길어져야하니까 1fr */
+            grid-template-areas: 
+            "header"
+            "swiper"
+            "side"
+            "content"
+            "footer";
+            }
+        }
+        .footer {grid-area: footer; background-color: #45b7d1; border-radius: 10px;}

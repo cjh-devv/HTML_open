@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8.4.7/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8.4.7/swiper-bundle.min.js"></script>
+    <!-- 영역잡는, 반응형 웹  -->
+</head>
+<body>
+    <!-- 컨테이너에 클래스 해줬으면 아이디 앱 넣어도 된다. -->
+    <div id="app" class="container">
+            <div class="header">
+                <div class="header-logo">
+                    <img src="../media/logo.png" class="logo-image">
+                </div>
+                <div class="header-search">
+                    <input type="text" placeholder="검색어를 입력하세요..." @keyup.enter="fnList" v-model="keyword">
+                    <button type="button" class="search-btn" @click="fnList">검색</button>
+                </div>
+                <div class="header-utils">
+                    <span style="cursor: pointer;" @click="fnInfo2(sessionId)">{{sessionName}}</span>
+                    <button @click="fnLogout">로그아웃</button>
+                </div>
+            </div>
+            <div class="box-banner">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="../media/banner1.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="../media/banner2.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="../media/banner3.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="../media/banner4.png" alt="">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="../media/banner5.png" alt="">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+            <div class="side">
+                <div class="top-menu">
+                    <h3 class="main-menu">카테고리</h3>
+                    <div class="sub-menu">
+                        <div><a href="javascript:;" @click="fnCategory('')">전체상품</a></div>
+                        <div v-for="item in categoryList">
+                            <a href="javascript:;" @click="fnCategory(item.CATEGORY)">{{item.CATEGORY}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-menu2">
+                <h3 class="main-menu">가격대</h3>
+                    <div class="sub-menu2">
+                        <div><input type="checkbox">1만원 이하</div>
+                        <div><input type="checkbox">1만원 ~ 3만원</div>
+                        <div><input type="checkbox">3만원 ~ 5만원</div>
+                        <div><input type="checkbox">5만원 이상</div>
+
+                    </div>
+                </div>    
+            </div>
+
+            <div class="content">
+                <div class="widget" v-for="item in list" @click="fnInfo(item.PRODUCT_ID)">
+                    <!-- <div class="card" style="background-image: url(../media/캡처1.JPG);"></div> -->
+                    <img class="card" :src="item.IMG_PATH" alt="">
+                    <div class="product-name">
+                        {{item.PRODUCT_NAME}}
+                    </div>
+                    <div class="category">
+                        {{item.CATEGORY}}
+                    </div>
+                    <div id="price">
+                        {{item.PRICE_WON}} 원
+                    </div>
+                </div>
+                <div v-if="list.length == 0">
+                    <div style="font-size: 80px; color: red; font-weight: bold;">등록된 제품이 없습니다.</div>          
+                </div>
+            </div>
+            <div class="footer">푸터~~</div>
+    </div>    
+</body>
+</html>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                list : [],
+                categoryList:[],
+                keyword:"",
+                category:"",
+                sessionName : "",
+                sessionId : ""
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            // 이미지 src="item.IMG_PATH"
+            // 변수함수카멜
+            // 태그 들여쓰기
+            // 오타 줄이기
+            fnList: function () {
+                let self = this;
+                $.ajax({
+                    url: "http://192.168.30.57:3009/product/list",
+                    dataType: "json",
+                    type: "GET",
+                    data: {keyword : self.keyword, brand : "", category : self.category},   //변수선언 안하면 널값으로 보냄->undefined  일단 ""로 하니 됨
+                    success: function (data) {
+                        console.log(data);
+                        self.list = data.productList;         //프로덕트리스트는 서버에서 정한이름. 서버에서 보내준거
+                    }
+                });
+            },
+            fnCategoryList: function () {
+                let self = this;
+                $.ajax({
+                    url: "http://192.168.30.57:3009/category/list",
+                    dataType: "json",
+                    type: "GET",
+                    data: {}, //카테고리목록만 받을거니까 굳이 보내줄 필요 없음
+                    success: function (data) {
+                        console.log(data);         //이거 써서 콘솔창에서 data. 뭘로 이름 정해졌는지 봐야해
+                        self.categoryList = data.categoryList;
+                    }
+                });
+            },
+            fnCategory: function(category){
+                let self = this;
+                self.category = category;
+                self.fnList();
+            },
+            fnInfo:function(productId){
+                // product.info.html
+                location.href="product-info.html?productId=" + productId;  //""안에서는 공백도 문자로 인식하니까 주의
+            },
+            fnInit: function() {
+                const swiper = new Swiper('.swiper', {
+	            // 기본 옵션 설정
+                    loop: true, // 반복
+                    autoplay: {
+                        delay: 2500,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            },
+            fnLogout: function(){ //로그아웃 버튼 클릭시 세션에 있는 모든 정보 지우고 로그인 페이지로 이동
+                if(!confirm("정말 떠나실?")){
+                    return;
+                }
+                console.log("삭제전", localStorage.getItem("sessionName"));
+                localStorage.clear();  //호출만 하면 끝  전부 비워
+                console.log("삭제후 => ", localStorage.getItem("sessionName"));
+                // localStorage.removeItem();         키값을 넣어서 그것만 지워
+                location.href="Login.html"
+            },
+            fnInfo2:function(sessionId){
+                // product.info.html
+                location.href="mypage.html?userId=" + sessionId;  //""안에서는 공백도 문자로 인식하니까 주의
+            },
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            let self = this;
+            self.fnCategoryList();
+            self.fnList();                 //버튼이 아니라 들어가자마자 떠야 하는 부분 있어서
+            self.fnInit();
+            console.log("localName => ", localStorage.getItem("sessionName"));
+            //product-home.html에 접속시 sessionId가 localStorage에 없을 경우
+            //'로그인 후이용해주세요' 출력후 로그인 페이지로 이동
+            // 같은 브라우저, 탭은 공유해서 다른브라우저나 시크릿모드로 검사해야함
+            
+            // if(localStorage.getItem("sessionName") == null){
+            //     alert("로그인 후 이용해주세요");
+            //     location.href="Login.html"
+            // };
+            self.sessionName = localStorage.getItem("sessionName");
+            self.sessionId = localStorage.getItem("sessionId")
+        }
+    });
+    //1.mypage.html 생성
+   //2.유저아이콘 or 이름 클릭시 mypage.html로 이동 -> sessionId를 파라미터(주소)로 보내기
+   // 파라미터이름(키)는 userId
+   //3.mypage.html에서는 파라미터로 받은 userId를 ajax를 이용해서 서버/user/info 주소를 호출하면서 보내기
+   //(키:userId, value : 파라미터로 받은 userId에 있는 값) - 결과 콘솔로 확인
+    app.mount('#app');
+</script>

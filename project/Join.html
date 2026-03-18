@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            background-color: #eee;
+        }
+
+        #container {
+            width: 400px;
+            height: 700px;
+            border: 2px solid white;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 100px auto;
+            padding: 20px;
+            /* justify-content: space-around; */
+        }
+
+        #head {
+            text-align: center;
+        }
+
+        #subhead {
+            text-align: center;
+            color: #666;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 5px;
+
+        }
+        .userId{
+            /* width: 60%; */
+            border-radius: 5px;
+            width: 250px;
+            height: 50px;
+            background-color: white;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+        }
+        label {
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        #input1 {
+            border-radius: 5px;
+            width: 200px;
+            height: 50px;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        .input2 {
+            border-radius: 5px;
+            width: 370px;
+            height: 50px;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        #button {
+            margin: 10px;
+            padding: 12px;
+            background-color: #ccc;
+            color: white;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            /* cursor: pointer; */
+            border: 2px solid #ccc;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4A90E2;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+        .signup-btn-false {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+        .signup-btn:hover {
+            background-color: #357ABD;
+        }
+        #tag {
+            text-align: center;
+        }
+
+        #check {
+            display: inline-block;
+            width: 100px;
+            margin-left : 10px;
+            border-radius: 6px;
+        }
+        .warning-area{
+            height: 60px;
+        }
+        .warning-txt {
+            color: red;
+            font-size: 12px;
+            margin: 2px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="container">
+            <h1 id="head">회원가입</h1>
+            <div id="subhead">새로운 계정을 만들어 서비스를 시작하세요.</div>
+            <br>
+            <label>이름<br><input class="input2" type="text" v-model="name" placeholder="   홍길동"></label>
+            <div id="idid">
+                <!-- <label>아이디<br><input class="input1" type="text" v-model="userId" placeholder="   아이디를 입력해주세요."></label> -->
+                <label>아이디<br><input v-if="!result" class="userId" type="text" v-model="userId" placeholder="아이디를 입력해주세요.">
+                <input v-else disabled class="userId" type="text" v-model="userId" placeholder="아이디를 입력해주세요."></label>
+                <!-- 2. 최초 진입 시 버튼 활성화 -->
+                 <!-- result가 true(아이디 사용가능)가 되면 비활성화 -->
+                <button id="check" @click="fnCheck">중복체크</button>
+                
+            </div>
+            <label>비밀번호<br><input class="input2" type="text" v-model="pwd1" placeholder="   4자 이상 입력"></label>
+            <div v-if="pwd1.length < 4 && pwd1 !=''" class="warning-txt">*비밀번호 4글자 이상</div>
+            <label>비밀번호 확인<br><input class="input2" type="text" v-model="pwd2" placeholder="   비밀번호를 다시 입력하세요"></label>
+            <div>
+            <span v-if="pwd2.length < 4 && pwd2 !=''" class="warning-txt">*비밀번호 4글자 이상</span>
+            <span v-if="pwd1 != pwd2" class="warning-txt">*비밀번호가 다릅니다.</span>
+            </div>
+            <!-- 3. 최초 진입시 버튼 비활성화 -->
+            <!-- result가 true(아이디 사용 가능)가 되면 활성화 -->
+            <button v-if="result" class="signup-btn" @click="fnUserAdd">가입하기</button> 
+            <button v-else class="signup-btn-false" disabled>가입하기</button>
+            <div id="tag">
+                <a style="color: #666;">이미 계정이 있으신가요?</a>
+                <a href="#" style="color: #4688d5;">로그인</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    //태그를 우선 브이모델로 연결해야함        함수도 만들고 변수도 만들고    0순위 참조사이트!!  앱으로 감싸!!!
+    // /add    name, userId,   pwd  (패스워드는 4글자 이상, 확인이랑도 일치해야)
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                userId: "",
+                result : false,        //0.result 만들고 처음엔 펄스  중복 체크 여부 
+                name: "",
+                pwd1: "",
+                pwd2: "",
+                
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            fnCheck: function () {
+                let self = this;
+                let param = {
+                    userId: self.userId
+                };
+                if(self.userId.length < 4){
+                    alert("아이디는 4글자 이상!");
+                    // self.userId = "";     틀렸으니까 아이디 지워줄게
+                    return;
+                }
+                
+                
+                $.ajax({
+                    url: "http://192.168.30.57:3009/id-check",
+                    dataType: "json",
+                    type: "GET",
+                    data: param,
+                    success: function (data) {
+                        console.log(data);              // 서버에서 뭐 보내는지 확인하는
+                        alert(data.message);
+                        //1. 서버로부터 받은 true(사용가능) or false(사용불가) 값 result에 담음
+                        self.result = data.success;
+                        // let btn = document.querySelector("#button");
+                        
+                    }
+                });
+            },
+            fnUserAdd: function () {
+                let self = this;       //이거 만들고 쓰는게 안전 ajax내에서는 this의 주체가 ajax객체가 되어버려서 셀프쓰는거
+                let param = {          //밖에서 만들어서 data에 넣어버리면 편하다는데
+                    name : self.name,       //좌  서버에서 원하는 이름. 내가 맞춰줘야되         우  내꺼 변수이름
+                    userId : self.userId,
+                    pwd : self.pwd1,
+                }; 
+                if(self.pwd1.length < 4){               //빈값으로 넣어도 비번=확인 되니까 이거 먼저 걸어
+                    alert("아이디는 4글자 이상!");
+                    // self.userId = "";     틀렸으니까 아이디 지워줄게
+                    return;
+                }
+                if(self.pwd1 != self.pwd2){
+                    alert("비번이랑 확인이랑 다르다!")
+                    return
+                }  
+                
+                $.ajax({
+                    url: "http://192.168.30.57:3009/add",
+                    dataType: "json",
+                    type: "GET",
+                    data: param,
+                    success: function (data) {
+                        console.log(data);              // 서버에서 뭐 보내는지 확인하는
+                        alert("성공한듯??")
+                        location.href="Login.html"    //페이지 이동!!!
+                    }
+                });
+            }
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+        }
+    });
+    app.mount('#app');    //복사 제대로!!
+</script>
