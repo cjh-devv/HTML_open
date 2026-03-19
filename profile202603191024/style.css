@@ -1,0 +1,155 @@
+        .container{
+            width: 1300px;
+            height: 750px;
+            margin: 0% auto;
+            box-sizing: border-box;
+            border-radius: 2%;
+            box-shadow:3px 3px 3px gray;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            grid-template-rows: 50px minmax(200px, auto) minmax(800px, auto) 150px;
+            grid-template-areas:
+            "header header header"
+            "Lbar main Rbar";            
+        }
+        .header{
+            width: 100%;
+            height: 100%;
+            grid-area: header;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .txtbox{
+            /* width: 1200px; */
+            height: 50px;
+            /* border: 1px solid black; */
+            
+            transform-style:preserve-3d;
+        }
+        .txt{
+            width: 100%;
+            height: 100%;
+            /* border: 1px solid red; */
+            font-size: 30px;
+            white-space: nowrap; /* 텍스트가 길어도 절대 줄바꿈 하지 않음 */
+            overflow: hidden;    /* 화면 밖으로 나가는 부분은 숨김 (선택 사항) */
+            display: none;
+        }
+        .txt2{
+            width: 100%;
+            height: 100%;
+            background-color: rgb(255, 0, 0);
+            /* border: 1px solid red; */
+            font-size: 30px;
+            transform: translateZ(10px);
+        }
+        #sidebar{
+            grid-area: Lbar;
+            height: 700px;
+            width:  250px;
+            background-color: rgb(86, 86, 233);
+            color: white;
+            text-align: center;
+            border-top-left-radius: 2%;
+            border-bottom-left-radius: 2%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+        }
+        #main{
+            grid-area: main;
+            margin-left: 30px;
+            box-sizing: border-box;
+        }
+        #imgbox{
+            width: 150px;
+            height: 150px;
+            display: block;
+            position: relative;
+            top: 15px;
+            left: 50px;
+        }
+        #box1{
+            width: 100%;
+            height: 100%;
+            display: block;
+            /* position: relative;
+            top: 15px;
+            left: 50px; */
+        }
+        #box1:hover img{
+           /* src="../media/캡처2.JPG"; */
+        }
+        #namecard{
+            display: block;
+        }
+        #detail{
+            display: block;
+        }
+        #sns{
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        a{
+         text-decoration: none;  
+         align-content: center;
+         top: px;
+         border-radius:38%;
+            width: 70px;
+            height: 40px;
+            position: absolute;
+            left: 90px;
+            background-color: white;
+            color: rgb(86, 86, 233);
+        }
+        a:hover{
+            background-color: rgb(86, 86, 233);
+            color: white;
+        }
+        #main{
+            box-sizing: border-box;
+        }
+        #main h2{
+            border-left: 5px solid rgb(86, 86, 233);
+        }
+        tr td{
+            border: 2px solid gray;
+        }
+        .table{
+            border: 2px solid gray;
+            width: 348px;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        .table thead{
+            background-color: rgb(86, 86, 233);
+            color: white;
+        }
+        .timebox{
+            position: absolute;
+            bottom: 10px;
+            left: 50px;
+        }
+        #time{
+            color: violet;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .Rsidebar{
+            grid-area: Rbar;
+            height: 700px;
+            width:  250px;
+            background-color: rgb(86, 233, 221);
+            color: white;
+            text-align: center;
+            /* border-top-right-radius: 2%; */
+            border-bottom-right-radius: 2%;
+            display: flex;
+            flex-direction: column;
+        }

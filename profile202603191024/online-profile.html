@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<title>온라인 프로필</title>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <!-- 사이드바 -->
+         <div class="header">
+            <div class="txtbox">
+                <div class="txt"></div>
+                <div class="txt2">test</div>
+            </div>
+         </div>
+        <aside id="sidebar">
+            <div id="namecard">
+                <div id="imgbox">
+                <!-- <img src="../media/캡처1.JPG" alt="" id="box1"> -->
+                </div>
+                <h1>Choi JeHyeon</h1>    
+                <p>프로그래밍 열심히 하겠습니다!</p>
+            </div>
+            <div id="detail">
+                <p>⛪Incheon, Korea</p>
+                <p>📧test@naver.com</p>
+                <p>📞010-1234-4567</p>                                 
+            </div>
+            <div id="sns">
+                <h2>SNS</h2>
+                    <h3><a href="#">클릭!</a></h3>
+            </div>
+            <div class="timebox">
+               <div id="time"></div> 
+            </div>          
+        </aside>
+        <div id="main">
+            <section>
+                <h2 class="subtitle">자기소개</h2>
+                <p><mark>프로그래밍</mark>에 관심이 많습니다. <br>현재 열심히 공부하며 코딩 중!</p>
+            </section>
+
+            <!-- 경력 -->
+            <section>
+                <h2 class="subtitle">Experience</h2>
+                <ul>
+                    <li>프론트엔드
+                        <ul>
+                            <li>HTML/CSS/JAVASCRIPT </li>
+                            <li>웹 페이지 잘 만든다 </li>
+                            <li>다 잘함</li> 
+                        </ul>
+                    </li>
+                    <li>백엔드
+                        <ul>
+                            <li>자바 잘함 </li>
+                            <li>오라클 더 잘함</li>
+                        </ul>                        
+                    </li>
+                </ul>             
+            </section>
+
+            <!-- 숙련도 -->
+            <section>
+                <h2 class="subtitle">보유 기술</h2>
+                <li style="list-style: none;"> 
+                    <ul>
+                        <li>자바 </li>
+                        <li>오라클</li>
+                    </ul>                        
+                </li>
+            </section>
+
+            <!-- 학력 -->
+            <section>
+                <h2 class="subtitle">Education</h2>
+                <table class="table">
+                  <caption>학력 사항</caption>
+                  <thead>
+                      <tr>
+                          <th>출신학교</th>
+                          <th>전공</th>
+                          <th>기간</th>
+                          <th>구분</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>좋은대학교</td>
+                          <td>좋은학과</td>
+                          <td>2010.3 ~ 2013.2</td>
+                          <td>졸업</td>
+                      </tr>
+                      <tr>
+                          <td>꽤좋은고등학교</td>
+                          <td> - </td>
+                          <td>2007.3 ~ 2009.2</td>
+                          <td>졸업</td>
+                      </tr>
+                  </tbody>
+                </table>
+            </section>
+        </div>  
+        <div class="Rsidebar">
+            <button @click="fnWeather">날씨</button>
+        </div>      
+    </div>
+</body>
+</html>
+<script>
+    setInterval(()=>{
+        let datetime = new Date();
+        let obj = document.querySelector("#time");
+        let second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+        let minute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+        let ampm = datetime.getHours() < 12 ? "오전 " : "오후 ";
+        let hours = datetime.getHours() % 12;
+        hours = (hours == 0) ? 12 : hours;
+        let time = (datetime.getFullYear() + "년 " + (datetime.getMonth() + 1) + "월 " + datetime.getDate()) 
+                   + "일 " + "<br>" + ampm + hours + " : "
+                    + minute + " : "
+                    + second;
+
+        obj.innerHTML = time;
+    }, 1000);
+
+    let text = `오늘도수업수고하셨습니다경제적자유선상마약코딩파티취업이나할까
+    코딩안배우고일하는사람들한심해보이지않네요해커생각중입니다코딩왜안함치킨집사장님
+    족발집사장님이걸왜이제알았을까이력서내고오는길`
+    let obj = document.querySelector(".txt");
+    
+    setInterval(() => {
+        text = text.substring(1) + text.charAt(0);
+        let r = Math.floor(Math.random()*256);
+        let g = Math.floor(Math.random()*256);
+        let b = Math.floor(Math.random()*256);
+        obj.innerHTML = "<div style='color:rgb(" + r+ ","+ g + ","+ b+ ")'>" + text + "</div>";
+        }, 50);
+    
+    // const app = Vue.createApp({
+    //     data() {
+    //         return {
+    //             // 변수 - (key : value)
+    //             temp:""
+    //         };
+    //     },
+    //     methods: {
+    //         // 함수(메소드) - (key : function())
+    //         fnWeather: function () {
+    //             let self = this;
+    //             $.ajax({
+    //                 url: "https://api.open-meteo.com/v1/forecast",
+    //                 dataType: "json",
+    //                 type: "GET",
+    //                 data: {
+    //                     latitude: 37.5,    
+    //                     longitude: 126.7,
+    //                     current_weather: true},
+    //                 success: function (data) {
+    //                     console.log(data.current_weather.temperature)
+    //                     alert("현재 부평(37.5, 126.7)의 온도는 " + data.current_weather.temperature + "도 입니다.")
+    //                     // self.temp =  
+    //                 }
+    //             });
+    //         }
+    //     }, // methods
+    //     mounted() {
+        
+    //     }
+    // });
+
+    // app.mount('#app');
+</script>

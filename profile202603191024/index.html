@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="online-profile.html">온라인 프로필!</a>
+    <div id="txt">
+
+    </div>
+</body>
+</html>
+<script>
+let text = "안녕하세요. 반갑습니다!"
+    let currentText = "";
+    let i = 0;
+    let obj = document.querySelector("#txt");
+    let id = setInterval(()=>{
+        currentText = currentText + text.charAt(i);   //기존의 텍스트에 새로운 텍스트 추가. 
+        obj.innerHTML = currentText;                //추가되는것처럼 보이지만 처음부터 다시 찍는거
+        i++;
+        if(i >= text.length){
+            currentText = "";          //  초기화하면 0.3초뒤 다시 실행되면 처음부터 다시
+            i=0;
+        }
+    },300);
+    setInterval2(() => {
+        for(let i=0; i<txt.length;i++){
+            for(let j=i+1; j<txt.length;j++){
+                text.charAt(j);
+            }
+        }
+    }, 100);
+</script>
